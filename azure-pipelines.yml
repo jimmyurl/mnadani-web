@@ -1,0 +1,96 @@
+# azure-pipelines.yml
+trigger:
+  - main
+  - develop
+
+variables:
+  npm_config_cache: $(Pipeline.Workspace)/.npm
+
+stages:
+  - stage: Build
+    displayName: 'Build React App'
+    jobs:
+      - job: BuildJob
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '18.x'
+            displayName: 'Install Node.js'
+
+          - task: Cache@2
+            inputs:
+              key: 'npm | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                npm | "$(Agent.OS)"
+              path: $(npm_config_cache)
+            displayName: 'Cache npm packages'
+
+          - script: |
+              npm ci
+            displayName: 'Install Dependencies'
+
+          - script: |
+              npm run lint
+            displayName: 'Run Linting'
+            continueOnError: true
+
+          - script: |
+              npm run test -- --watchAll=false
+            displayName: 'Run Tests'
+            continueOnError: false
+
+          - script: |
+              npm run build
+            displayName: 'Build React App'
+
+          - task: ArchiveFiles@2
+            inputs:
+              rootFolderOrFile: 'build'
+              includeRootFolder: false
+              archiveType: 'zip'
+              archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+              replaceExistingArchive: true
+
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: 'drop'
+              publishLocation: 'Container'
+
+  - stage: Deploy_Dev
+    displayName: 'Deploy to Development'
+    dependsOn: Build
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
+    jobs:
+      - deployment: Deploy
+        environment: 'development'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: AzureWebApp@1
+                  inputs:
+                    azureSubscription: '$(AZURE_SUBSCRIPTION)'
+                    appName: '$(DEV_WEBAPP_NAME)'
+                    package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+                    deploymentMethod: 'auto'
+
+  - stage: Deploy_Prod
+    displayName: 'Deploy to Production'
+    dependsOn: Build
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+    jobs:
+      - deployment: Deploy
+        environment: 'production'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: AzureWebApp@1
+                  inputs:
+                    azureSubscription: '$(AZURE_SUBSCRIPTION)'
+                    appName: '$(PROD_WEBAPP_NAME)'
+                    package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+                    deploymentMethod: 'auto'
