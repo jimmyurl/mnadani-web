@@ -1,12 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Home as HomeIcon, Heart, PlusCircle, User } from 'lucide-react';
-
-// Import your pages
-import HomePage from './pages/HomePage';
-import FavoritesPage from './pages/FavoritesPage';
-import SellPage from './pages/SellPage';
-import ProfilePage from './pages/ProfilePage';
+import HomePage from './components/pages/HomePage'
+import FavoritesPage from './components/pages/FavoritesPage';
+import SellPage from './components/pages/SellPage';
+import ProfilePage from './components/pages/ProfilePage';
 
 const NavigationBar = () => {
   const location = useLocation();
