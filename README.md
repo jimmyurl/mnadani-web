@@ -1,70 +1,97 @@
-# Getting Started with Create React App
+# Navigation App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a responsive navigation-based React application with a user-friendly bottom navigation bar. It is built using `react-router-dom` for routing and `lucide-react` for icons, offering smooth navigation between different pages.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Bottom Navigation Bar**: A fixed bottom navigation bar for quick access to core app sections: Home, Favorites, Sell, and Profile.
+- **Dynamic Routing**: Seamlessly navigate between pages using `react-router-dom`.
+- **Modern Icons**: Uses `lucide-react` for sleek and modern icons.
+- **Responsive Design**: Optimized for mobile devices with a clean layout.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Project Structure
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+src/
+├── components/
+│   ├── pages/
+│   │   ├── HomePage.js
+│   │   ├── FavoritesPage.js
+│   │   ├── SellPage.js
+│   │   ├── ProfilePage.js
+│   └── NavigationBar.js
+├── App.js
+└── index.js
+```
 
-### `npm test`
+### Pages
+- **HomePage**: Displays the main feed or homepage content.
+- **FavoritesPage**: Shows user's favorite items.
+- **SellPage**: Allows users to post items for sale.
+- **ProfilePage**: Displays user profile and related information.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/jimmyurl/mnadani-web.git
+   cd mnadani-web
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Start the development server:
+   ```bash
+   npm start
+   ```
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Usage
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Navigate through the app using the bottom navigation bar.
+2. The navigation bar icons and labels are highlighted dynamically based on the active route.
+3. Customize page content in the `pages` directory as per your application needs.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Dependencies
 
-## Learn More
+- **React**: Frontend library for building user interfaces.
+- **React Router**: Handles routing in the application.
+- **Lucide React**: Provides modern and scalable SVG icons.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To install these dependencies, run:
+```bash
+npm install react react-router-dom lucide-react
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## Customization
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. **Adding a New Page**:
+   - Create a new component in the `pages` directory.
+   - Add a route for the new page in `App.js`.
+   - Update the `navItems` array in `NavigationBar` to include the new page.
 
-### Analyzing the Bundle Size
+2. **Styling**:
+   - Modify the navigation bar's style by editing the `NavigationBar` component.
+   - Update global styles as needed in your CSS or framework.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+This project is open-source and available under the [MIT License](LICENSE).
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Happy coding! 🎉
