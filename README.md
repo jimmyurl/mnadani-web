@@ -1,4 +1,4 @@
-# Navigation App
+# Mnadani web App
 
 This project is a responsive navigation-based React application with a user-friendly bottom navigation bar. It is built using `react-router-dom` for routing and `lucide-react` for icons, offering smooth navigation between different pages.
 
