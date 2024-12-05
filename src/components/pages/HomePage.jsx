@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Search, ShoppingCart, LocalOffer } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent } from "@/components";
+import { Card, CardContent } from "../ui/card";
+import Tabs from '../ui/tabs.tsx';
+
 
 // Sample product data
 const PRODUCTS = [
